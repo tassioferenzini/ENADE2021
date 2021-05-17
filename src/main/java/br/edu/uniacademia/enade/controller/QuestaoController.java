@@ -63,27 +63,18 @@ public class QuestaoController implements Serializable {
         this.questoes = questoes;
     }
 
-    public void onRowEdit(RowEditEvent<Questao> event) {
-        QuestaoDAO.getInstance().atualizar(questao);
+    public void onRowEdit(RowEditEvent event) {
+        Questao q = (Questao) event.getObject();
+        QuestaoDAO.getInstance().atualizar(q);
         questoes = QuestaoDAO.getInstance().buscarTodas();
         questao = new Questao();
-        FacesMessage msg = new FacesMessage("Editado", event.getObject().getIdQuestao().toString());
+        FacesMessage msg = new FacesMessage("Editado", q.getIdQuestao().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void onRowCancel(RowEditEvent<Questao> event) {
         FacesMessage msg = new FacesMessage("Cancelado", event.getObject().getIdQuestao().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-
-        if (newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
     }
 
 }

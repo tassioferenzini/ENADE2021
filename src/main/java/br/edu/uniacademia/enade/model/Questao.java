@@ -19,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -51,8 +50,7 @@ public class Questao implements Serializable {
     @Column(name = "idQuestao")
     private Integer idQuestao;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "descricaoQuestao")
     private String descricaoQuestao;
     @Size(max = 45)
@@ -77,7 +75,7 @@ public class Questao implements Serializable {
     @ManyToMany(mappedBy = "questaoList")
     private List<Prova> provaList;
     @JoinColumn(name = "TipoQuestao_idTipoQuestao", referencedColumnName = "idTipoQuestao")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private TipoQuestao tipoQuestaoidTipoQuestao;
 
     public Questao() {
