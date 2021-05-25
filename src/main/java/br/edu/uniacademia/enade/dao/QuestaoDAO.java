@@ -60,7 +60,6 @@ public class QuestaoDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            e.printStackTrace();
         }
         return tipoQuestao;
     }
@@ -72,7 +71,7 @@ public class QuestaoDAO {
             em.persist(tipoQuestao);
             em.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            em.getTransaction().rollback();
         }
     }
 

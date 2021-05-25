@@ -49,7 +49,7 @@ public class PersistenceUtil {
         if (em != null) {
             em.close();
         }
-        MANAGER.set(null);
+        MANAGER.remove();
     }
 
     public static Session getSession() {
